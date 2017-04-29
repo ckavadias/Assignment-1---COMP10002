@@ -1,0 +1,43 @@
+/* Finding Amicable pairs of numbers up to an input limit*/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+int sum_fact( int num);
+
+int
+main(int argc, char *argv[]) {
+	int num1, num2, MAX_LIMIT;
+	/*take upper limit of search*/
+	printf("Please input upper limit for amicable pair: ");
+	
+	if (!scanf("%d", &MAX_LIMIT)){
+			printf("No integer entered, program failure\n");
+			exit(EXIT_FAILURE);
+			
+	} printf( "Amicable pairs between %d and %d\n", 0, MAX_LIMIT);
+	
+    /* search for amicable pairs */
+    for ( num1 = 1; num1 <= MAX_LIMIT ; num1++){
+    	num2 = sum_fact(num1);
+    	if (sum_fact(num2) == num1 && num2 <= MAX_LIMIT){
+    		printf( "%10d %10d\n ", num1, num2);
+    	}
+    }
+ 
+	return 0;
+}
+
+/* determine sum of factors */
+int
+sum_fact(int num){
+	int i, sum = 1;
+	for (i = 2 ; i*i < num ; i++){
+		if (!(num%i)){
+			sum += i;
+			sum += (num/i);
+		}
+	}
+	
+	return sum;	
+}
